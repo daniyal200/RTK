@@ -1,8 +1,9 @@
-import React, {useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
+import Toast from 'react-bootstrap/Toast';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { setDispatchdeleteUser} from '../features/counter/auth';
+import { setDispatchdeleteUser } from '../features/counter/auth';
 import { Link } from "react-router-dom";
 import '../App.css'
 import PopUp from './PopUp';
@@ -11,15 +12,15 @@ const Dashboard = () => {
     const auth = useSelector(state => state.auth)
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         if (auth.totalUsers.length === 0) {
             navigate("/")
         }
     })
 
-    const handleDeleteUser=(usernameToDelete) =>{
-        dispatch(setDispatchdeleteUser({username:usernameToDelete}));
+    const handleDeleteUser = (usernameToDelete) => {
+        dispatch(setDispatchdeleteUser({ username: usernameToDelete }));
     }
 
 
@@ -27,10 +28,18 @@ const Dashboard = () => {
     return (
         <div>
             <nav className='nav'> 
-            <h1 className='greet1'><Link to="/">Logout</Link></h1>
-            </nav>
-            <h1>Your User Name is : {auth.user.username} </h1>
-            <h1>Your Full Name is : {auth.user.firstname} {auth.user.lastname}</h1>
+            <h4 className='greet'><Link to="/" className='regg'>Logout</Link></h4></nav>
+            <div className='details'>
+            <Toast>
+                <Toast.Header>
+                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                    <strong className="me-auto">Current User</strong>
+                </Toast.Header>
+                <Toast.Body> User Name : {auth.user.username} </Toast.Body>
+                <Toast.Body> Full Name : {auth.user.firstname} {auth.user.lastname}</Toast.Body>
+            </Toast>
+            </div>
+            
             <section>
                 <>
                     <table className='table'>
@@ -48,7 +57,7 @@ const Dashboard = () => {
                                             <td>{item.lastname}</td>
                                             <td>{item.username}</td>
                                             <td>{item.password}</td>
-                                            <td><button className ='but' onClick={() => handleDeleteUser(item.username)}>Delete</button></td>
+                                            <td><button className='but' onClick={() => handleDeleteUser(item.username)}>Delete</button></td>
                                         </tr>
                                     </>
                                 )
@@ -61,8 +70,8 @@ const Dashboard = () => {
             <h4>
                 Total Users : {auth.totalUsers.length}
             </h4>
-            <PopUp/>
-        
+            <PopUp />
+
             <Link to="/">Logout</Link>
         </div>
     )

@@ -32,7 +32,7 @@ const Register = () => {
     return (
         <div>
             <nav className='nav'> 
-            <h3 className='greet1'><Link to="/">Login</Link></h3></nav>
+            <h4 className='greet'><Link to="/" className='regg'>Login</Link></h4></nav>
             <div className="reg">
                 <h1>Register</h1>
                 <label htmlFor="">First Name</label>

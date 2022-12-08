@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 import { setDispatchUser } from '../features/counter/auth';
+import '../App.css'
 
 const Login = () => {
     const auth = useSelector(state => state.auth)
@@ -28,12 +30,12 @@ const Login = () => {
     }
 
     return (
-
-        <div>
-            <nav className='nav'> 
-            <h3 className='greet1'><Link to="/register">Register</Link></h3></nav>
-            <section>
+        <div className='Login'>
+            <nav className='nav'>
+                <h4 className='greet'><Link to="/register" className='regg'>Register</Link></h4></nav>
+            <section className='form'>
                 <div className='reg'>
+                    <h1>Login</h1>
                     <label htmlFor="">UserName</label>
                     <input type="text" placeholder='UserName' value={username} onChange={e => setUsername(e.target.value)} />
                     <br />
@@ -43,7 +45,7 @@ const Login = () => {
                     <button onClick={handleLogin}>Login</button>
                     <Link to="/register">Register</Link>
                 </div>
-                </section>
+            </section>
         </div>
     )
 }
